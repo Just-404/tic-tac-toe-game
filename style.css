@@ -1,0 +1,44 @@
+*{
+    box-sizing: border-box;
+}
+
+html, body{
+    min-height: 100dvb;
+}
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.container{
+    height: 100%;
+    display: grid;
+    grid-template-rows: max-content 6fr 1fr;
+    gap: 2rem;
+}
+
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header output{
+    width: 100px;
+    height: fit-content;
+    background-color: gray;
+}
+.board{
+    background-color: black;
+    height: 25rem;
+    min-width: 30rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 0.3rem;
+}
+
+.cell{
+    background-color: white;
+}
+
