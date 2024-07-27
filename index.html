@@ -5,12 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tic tac toe game</title>
     <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
 </head>
 <body>
+
+    <dialog id="gameover"> 
+        <div class="container">
+            <output>Player 1 wins by row.</output>
+            <button>Restart</button>
+        </div>
+    </dialog>
+
+    <dialog id="start-game">
+        <div class="container">
+            <div class="title">Enter players' names:</div>
+            <form action="#">
+                <div class="players-name">
+                    <label for="player-one">Player 1:</label>
+                    <input type="text" id="player-one" name="player_one_name" placeholder="Player One" maxlength="20">
+                </div>
+                <div class="players-name">
+                    <label for="player-two">Player 2:</label>
+                    <input type="text" id="player-two" name="player_two_name" placeholder="Player Two" maxlength="20">
+                </div>
+
+            </form>
+            <div class="buttons">
+                <button>Start game</button>
+            </div>
+        </div>
+    </dialog>
     <div class="container">
        <header>
             <div class="player1">Player 1</div>
-            <output></output>
             <div class="player2">Player 2</div>
        </header>
 
@@ -27,7 +54,7 @@
         </div>
 
         <div class="buttons">
-            <button>Start</button>
+            <button id="show-modal">Start</button>
             <button>Restart</button>
         </div>
     </div>
