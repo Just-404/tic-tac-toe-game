@@ -15,7 +15,7 @@ body{
     height: 100%;
     display: grid;
     grid-template-rows: max-content 6fr 1fr;
-    gap: 2rem;
+    gap: 3rem;
 }
 
 dialog{
@@ -79,7 +79,7 @@ header{
 }
 
 header [class^="player"]{
-    
+    font-size: 1.2em;
 }
 
 header output{
@@ -90,7 +90,7 @@ header output{
 .board{
     background-color: black;
     height: 25rem;
-    min-width: 30rem;
+    min-width: 25rem;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
@@ -101,3 +101,16 @@ header output{
     background-color: white;
 }
 
+.container .buttons button{
+    font-size: calc(1em + 0.2rem);
+    padding: 0.5rem;
+    background-color: rgb(60, 66, 60);
+    color: white;
+
+}
+
+.container .buttons button:hover{
+    background-color: rgb(199, 193, 193);
+    color: black;
+    border: none;
+}

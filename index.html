@@ -11,7 +11,7 @@
 
     <dialog id="gameover"> 
         <div class="container">
-            <output>Player 1 wins by row.</output>
+            <output></output>
             <button>Restart</button>
         </div>
     </dialog>
@@ -19,26 +19,26 @@
     <dialog id="start-game">
         <div class="container">
             <div class="title">Enter players' names:</div>
-            <form action="#">
+            <form action="#" id="players-names">
                 <div class="players-name">
                     <label for="player-one">Player 1:</label>
-                    <input type="text" id="player-one" name="player_one_name" placeholder="Player One" maxlength="20">
+                    <input type="text" id="player-one" name="player_one_name" placeholder="Player One" maxlength="15">
                 </div>
                 <div class="players-name">
                     <label for="player-two">Player 2:</label>
-                    <input type="text" id="player-two" name="player_two_name" placeholder="Player Two" maxlength="20">
+                    <input type="text" id="player-two" name="player_two_name" placeholder="Player Two" maxlength="15">
                 </div>
 
             </form>
             <div class="buttons">
-                <button>Start game</button>
+                <button form="players-names">Start game</button>
             </div>
         </div>
     </dialog>
     <div class="container">
        <header>
-            <div class="player1">Player 1</div>
-            <div class="player2">Player 2</div>
+            <div class="player1"></div>
+            <div class="player2"></div>
        </header>
 
         <div class="board">
@@ -54,7 +54,6 @@
         </div>
 
         <div class="buttons">
-            <button id="show-modal">Start</button>
             <button>Restart</button>
         </div>
     </div>
