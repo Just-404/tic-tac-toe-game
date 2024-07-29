@@ -99,6 +99,10 @@ header output{
 
 .cell{
     background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3em;
 }
 
 .container .buttons button{
