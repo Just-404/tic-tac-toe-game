@@ -35,6 +35,7 @@ function GameBoard(){
     const clearBoard = () => {
         board.forEach((row) => row.forEach((cell) => cell.playerSelection(0)));
     }
+    
     const getBoard = () => board;
    
     const placeToken = (playerSel, cellRow, cellCol) => {
@@ -200,21 +201,20 @@ function GameController(playerOneName = "Player One", playerTwoName = "Player Tw
        }
        else{
             roundsPlayed++;
-            if(roundsPlayed < 9) {
+            if(roundsPlayed < 10) {
                 let winMsg;
 
                 if(roundsPlayed >= 3){
                     winMsg = checkWinning();
                 }
 
-                if(winMsg) {
-  
+                if(winMsg) { 
                     gameOver(winMsg);
                 }
+
                 else{
                     switchPlayerTurn();
-                    displayRound();
-    
+                    displayRound();   
                 }
              
             }
@@ -232,63 +232,85 @@ function GameController(playerOneName = "Player One", playerTwoName = "Player Tw
 }
 
 
-function ScreenController() {
+(function ScreenController() {
 
     let game = GameController();
     let players = [];
     const boardDiv = document.querySelector(".board");
     const clearBtn = document.querySelector("#clear-btn");
+    const loginDialog = document.getElementById("start-game");
+    const submitBtn = document.getElementById("get-names");
+    const playerOneName = loginDialog.querySelector("#player-one");
+    const playerTwoName = loginDialog.querySelector("#player-two");
+    const gameOverDialog = document.getElementById("gameover");
+
     let winMsg = "";
 
 
-    const openModal = (element, event) => {
-        document.addEventListener(event, () =>{
-            element.showModal();
-        });
+    const openModal = (element) => {
+        element.showModal();
     }
 
     const closeModal = (element) => {
-        document.addEventListener("click", () =>{
-            element.close();
-        });
+        element.close();
+       
+    }
+    
+    const showPlayerScreen = () => {
+        openModal(loginDialog);        
     }
 
-   
-    const showPlayerScreen = () => {
-        const dialog = document.getElementById("start-game");
-        const submitBtn = dialog.querySelector("#get-names");
+    const setPlayers = (event) => {
 
-        openModal(dialog, "DOMContentLoaded");
+        players = [playerOneName.value, playerTwoName.value];
+        setNames();
+        updateScreen();
 
-        submitBtn.addEventListener("click", (event) =>{
-            event.preventDefault();
-            let playerOneName = dialog.querySelector("#player-one").value;
-            let playerTwoName = dialog.querySelector("#player-two").value;
+        closeModal(loginDialog);
+        event.preventDefault();
 
-            players = [playerOneName, playerTwoName];
-            closeModal(dialog);
-            setNames();
-            updateScreen();
-        })    
+
+    }
+
+    const setNames = () => {
+        const playerOneNameDiv = document.querySelector(".player1");
+        const playerTwoNameDiv = document.querySelector(".player2");
+
+        if(players[0] === "") players[0] = "Player One";
+        if(players[1] === "") players[1] = "Player Two";
+
+        playerOneNameDiv.textContent = players[0];
+        playerTwoNameDiv.textContent = players[1];     
+
+        game = GameController(players[0], players[1]);
+
+    }
+
+    const resetGame = () => {
+        playerOneName.value = "";
+        playerTwoName.value = "";
+        closeModal(gameOverDialog);
+        openModal(loginDialog);
+        clearBoard();
+        startGame();
+    }
+
+    const playAgain = () => {
+        gameOverDialog.close();
+        clearBoard();
     }
 
     const showEndGameScreen = (msg) => {
-        const dialog = document.getElementById("gameover");
-        const playAgainBtn = dialog.querySelector(".container button");
-        const output = dialog.querySelector(".container output");
-        const retBtn = dialog.querySelector("#return-btn");
+        const playAgainBtn = gameOverDialog.querySelector("#restart");
+        const output = gameOverDialog.querySelector(".container output");
+        const retBtn = gameOverDialog.querySelector("#return-btn");
 
-        dialog.showModal();
+        gameOverDialog.showModal();
         output.textContent = msg;
 
-        playAgainBtn.addEventListener("click", () => {
-            clearBoard();
-            dialog.close();
-           
+        playAgainBtn.addEventListener("click", resetGame);
 
-        });
-
-        retBtn.addEventListener("click", () => dialog.close());
+        retBtn.addEventListener("click", playAgain);
 
     }
 
@@ -296,24 +318,6 @@ function ScreenController() {
         game.resetGame();
         winMsg = "";
         updateScreen();
-    }
-
-    const checkNames = () => {
-        if(players[0] === "") players[0] = "Player One";
-        if(players[1] === "") players[1] = "Player Two";
-    }
-
-    const setNames = () => {
-        const playerOneNameDiv = document.querySelector(".player1");
-        const playerTwoNameDiv = document.querySelector(".player2");
-        checkNames();
-
-        playerOneNameDiv.textContent += players[0];
-        playerTwoNameDiv.textContent += players[1];
-      
-
-        game = GameController(players[0], players[1]);
-
     }
 
     const updateScreen = () => {
@@ -342,6 +346,7 @@ function ScreenController() {
                     cell.textContent = "X";
 
                 }
+                
                 boardDiv.appendChild(cell);
 
             });            
@@ -356,21 +361,23 @@ function ScreenController() {
 
         game.playRound(rowIdx, colIdx);
         winMsg = game.getWinMsg();
-        console.log(winMsg != "");
 
-        if(winMsg != "") showEndGameScreen(winMsg);
+        if(winMsg != "") {
+            showEndGameScreen(winMsg);
+
+        }
         updateScreen();
 
     }
 
     const startGame = () => {
-        showPlayerScreen();
+        document.addEventListener("DOMContentLoaded", showPlayerScreen);  
+        submitBtn.addEventListener("click", setPlayers);  
         boardDiv.addEventListener("click", clickBoard);
         clearBtn.addEventListener("click", clearBoard);
         
     }
     
     startGame();
-}
+})()
 
-ScreenController();

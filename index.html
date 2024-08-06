@@ -12,8 +12,11 @@
     <dialog id="gameover"> 
         <div class="container">
             <output></output>
-            <button>Restart</button>
-            <button id="return-btn">Back</button>
+            <div>
+                <button id="return-btn">Play again</button>
+                <button id="restart">Restart</button>
+
+            </div>
         </div>
     </dialog>
 
@@ -39,9 +42,11 @@
     <div class="container">
        <header>
             <div class="player1"> </div>
-            <span>(O)</span>
+            <div id="tokens"><span>
+                <hr> O vs X <hr>
+            </span></div>
             <div class="player2"> </div>
-            <span>(X)</span>
+         
        </header>
 
         <div class="board">

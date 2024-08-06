@@ -4,7 +4,7 @@
 
 html, body{
     min-height: 100dvb;
-    font-family: monospace, sans-serif;
+    font-family: sans-serif;
 }
 body{
     display: flex;
@@ -29,8 +29,9 @@ dialog .container,
 form{
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
     gap: 2rem;
-
 }
 
 .title{
@@ -60,6 +61,15 @@ dialog::backdrop{
   );
 }
 
+#gameover::backdrop,
+#gameover{
+    height: 200px;
+    margin-top: 0;
+}
+#gameover{
+    justify-content: start;
+}
+
 dialog button{
     font-size: inherit;
     padding: 0.4rem;
@@ -76,10 +86,17 @@ header{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    font-size: 1.5em;
+    width: 29rem;
+
 }
 
-header [class^="player"]{
+#tokens span{
     font-size: 1.2em;
+}
+#tokens hr{
+    background-color: black;
+    height: 2px;
 }
 
 header output{
